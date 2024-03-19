@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
 import { AxiosRequestConfig, CanceledError } from "axios";
+import { Genre } from "./useGenres";
 
 
-interface FetchResponse<T> {
+ export interface FetchResponse<T> {
     count: number;
     results: T[];
 }
@@ -18,7 +19,7 @@ const useData = <T>(endpoint: string, requestConfig?: AxiosRequestConfig, deps?:
 
     setLoading(true);
     apiClient
-      .get<FetchResponse<T>>(endpoint, {signal: controller.signal,...requestConfig
+      .get<FetchResponse<Genre>>(endpoint, {signal: controller.signal,...requestConfig
       })
       .then((res) => {
       setData(res.data.results);
